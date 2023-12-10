@@ -22,8 +22,16 @@ class order {
   }
 
   get price() {
-    order.quantity * order.itemPrice -
-      Math.max(0, order.quantity - 500) * order.itemPrice * 0.05 +
-      Math.min(order.quantity * order.itemPrice * 0.1, 100);
+    return this.basePrice - this.quantityDiscount + this.shipping;
+  }
+
+  get basePrice() {
+    return order.quantity * order.itemPrice;
+  }
+  get quantityDiscount() {
+    return Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;
+  }
+  get shipping() {
+    return Math.min(order.quantity * order.itemPrice * 0.1, 100);
   }
 }
