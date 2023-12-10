@@ -1,14 +1,9 @@
 import { MockInvoice, Today } from "./6.1-extract-function.fixture.js";
 
 function print0wing(invoice) {
-  let outstanding = 0;
-
   printBanner();
 
-  // 미해결 채무(outstanding)를 계산한다.
-  for (const o of invoice.orders) {
-    outstanding += o.amount;
-  }
+  let outstanding = calculateOutstanding(invoice);
 
   recordDueDate(invoice);
   printDetails(invoice, outstanding);
@@ -18,6 +13,14 @@ function printBanner() {
   console.log("***************");
   console.log("**** 고객 채무 ****");
   console.log("***************");
+}
+
+function calculateOutstanding(invoice) {
+  let outstanding = 0;
+  for (const o of invoice.orders) {
+    outstanding += o.amount;
+  }
+  return outstanding;
 }
 
 function recordDueDate(invoice) {
