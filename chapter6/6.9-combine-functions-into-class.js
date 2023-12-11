@@ -11,7 +11,7 @@ const baseCharge = aReading.baseCharge;
 // client2
 const rawReading = acquireReading();
 const aReading = new Reading(rawReading)
-const texableCharge = Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
+const texableCharge = aReading.texableCharge;
 //client3
 const rawReading = acquireRading();
 const aReading = new reading(rawReading)
@@ -39,5 +39,9 @@ class Reading {
 
   get basaeCharge(aReading) {
     return baseRate(aReading.month, aReading.year) * aReading.quantity;
+  }
+
+  get texableCharge() {
+    return Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
   }
 }
