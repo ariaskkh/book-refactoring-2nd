@@ -5,7 +5,7 @@ import { assert } from "console";
 // ex1
 let defaultOwner = { firstName: "마틴", lastName: "파울러" };
 function getDefaultOwner() {
-  return defaultOwner;
+  return Object.assign({}, defaultOwner);
 }
 function setDefaultOwner(arg) {
   return (defaultOwner = arg);
