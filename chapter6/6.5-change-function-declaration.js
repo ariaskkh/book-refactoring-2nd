@@ -21,7 +21,11 @@ class Book {
 
 // ex3 매개변수 속성으로 바꾸기
 function inNewEngland(aCustomer) {
-  return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(aCustomer.address.state);
+  const stateCode = aCustomer.address.state;
+  return xxNEWinNewEngland(stateCode);
+}
+function xxNEWinNewEngland(stateCode) {
+  return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
 }
 
 const newEnglanders = someCustomers.filter((c) => inNewEngland(c));
