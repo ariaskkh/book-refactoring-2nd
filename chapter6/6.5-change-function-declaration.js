@@ -2,12 +2,12 @@
 
 import { assert } from "console";
 
-// ex1
+// ex1 함수 이름 바꾸기
 function circumference(radius) {
   return 2 * Math.PI * radius;
 }
 
-// ex2
+// ex2 매개변수 추가하기
 class Book {
   addReservation(customer) {
     this.zz_addReservation(customer, false);
@@ -18,3 +18,10 @@ class Book {
     this._reservations.push(customer);
   }
 }
+
+// ex3 매개변수 속성으로 바꾸기
+function inNewEngland(aCustomer) {
+  return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(aCustomer.address.state);
+}
+
+const newEnglanders = someCustomers.filter((c) => inNewEngland(c));
