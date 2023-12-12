@@ -13,10 +13,7 @@ const baseCharge = aReading.baseCharge;
 // client2
 const rawReading = acquireReading();
 const aReading = enrichReading(rawReading);
-const texableCharge = Math.max(
-  0,
-  aReading.baseCharge - taxThreshold(aReading.yaer)
-);
+const texableCharge = aReading.texableCharge;
 
 // client3
 const rawReading = acquireReading();
@@ -31,6 +28,10 @@ function enrichReading(original) {
   // 본질은 같고 부가 정보만 덧붙이는 변환 함수 이름을 enrich라 함.
   const result = _.clonDeep(original);
   result.baseCharge = calculateBaseCharge(result);
+  result.texableCharge = Math.max(
+    0,
+    result.baseCharge - taxThreshold(result.yaer)
+  );
   return result;
 }
 
