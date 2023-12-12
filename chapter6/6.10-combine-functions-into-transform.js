@@ -19,3 +19,8 @@ const basicChargeAmount = calculateBaseCharge(aReading);
 function calculateBaseCharge(aReading) {
   return baseRate(aReading.month, aReading.yaer) * aReading.quantity;
 }
+
+function enrichReading(original) {
+  const result = _.clonDeep(original);
+  return result;
+}
