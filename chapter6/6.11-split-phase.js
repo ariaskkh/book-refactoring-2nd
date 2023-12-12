@@ -7,24 +7,16 @@ function priceOrder(product, quantity, shippingMethod) {
     Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
     product.discountRate;
-  const priceData = {}; // 중간 데이터 구조
-  const price = applyShipping(
-    priceData,
-    basePrice,
-    shippingMethod,
-    quantity,
-    discount
-  );
+  const priceData = {
+    basePrice: basePrice,
+    quantity: quantity,
+    discount: discount,
+  }; // 중간 데이터 구조
+  const price = applyShipping(priceData, shippingMethod);
   return price;
 }
 
-function applyShipping(
-  priceData,
-  basePrice,
-  shippingMethod,
-  quantity,
-  discount
-) {
+function applyShipping(priceData, shippingMethod) {
   const shippingPerCase =
     basePrice > shippingMethod.discountThreshold
       ? shippingMethod.discountedFee
