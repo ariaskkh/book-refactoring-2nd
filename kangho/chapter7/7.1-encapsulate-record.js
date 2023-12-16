@@ -37,8 +37,16 @@ organization().name = newName; // 쓰기 예
 getCustomerData().setUsage(customerID, year, month, amount);
 // 읽기 예
 function compareUsage(customerID, laterYear, month) {
-  const later = getCustomerData().usage(customerID, laterYear, month);
-  const earlier = getCustomerData().usage(customerID, laterYear - 1, month);
+  const later = getCustomerData().rawData[customerID].usage(
+    customerID,
+    laterYear,
+    month
+  );
+  const earlier = getCustomerData().rawData[customerID].usage(
+    customerID,
+    laterYear - 1,
+    month
+  );
   return { laterAmount: later, change: later - earlier };
 }
 
