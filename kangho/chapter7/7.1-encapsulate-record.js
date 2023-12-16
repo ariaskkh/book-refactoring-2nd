@@ -34,7 +34,7 @@ organization().name = newName; // 쓰기 예
 
 // ex2 중첩된 레코드 캡슐화하기
 // 쓰기 예
-getRawDataOfCustomers()[customerID].usages[year][month] = amount;
+setUsage(customerID, year, month, amount);
 // 읽기 예
 function compareUsage(customerID, laterYear, month) {
   const later = setRawDataOfCustomers()[customerID].usages[laterYear][month];
@@ -43,9 +43,22 @@ function compareUsage(customerID, laterYear, month) {
   return { laterAmount: later, change: later - earlier };
 }
 
-function getRawDataOfCustomers() {
+function getCustomerData() {
   return customerData;
 }
+function getRawDataOfCustomers() {
+  return customerData._data;
+}
 function setRawDataOfCustomers(arg) {
-  customerData = arg;
+  customerData = new CustomerData(arg);
+}
+
+function setUsage(customerID, year, month, amount) {
+  getRawDataOfCustomers()[customerID].usages[year][month] = amount;
+}
+
+class CustomerData {
+  constructor(data) {
+    this._data = data;
+  }
 }
