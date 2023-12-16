@@ -6,18 +6,28 @@ const organization = new Organization({
   country: "CN",
 });
 
-function getRawDataOfOrganization() {
-  return organization.data;
-}
 function getOrganization() {
   return organization;
 }
 
 class Organization {
   constructor(data) {
-    this_.data = data;
+    this.name = data.name;
+    this._country = data.country;
+  }
+  get name() {
+    return this._data.name;
+  }
+  set name(aString) {
+    this._data.name = aString;
+  }
+  get country() {
+    return this._data.country;
+  }
+  set country(aCountryCode) {
+    return (this._country = aCountryCode);
   }
 }
 
-result += `<h1>${getRawDataOfOrganization().name}</h1>`; // 읽기 예
-getRawDataOfOrganization().name = newName; // 쓰기 예
+result += `<h1>${organization().name}</h1>`; // 읽기 예
+organization().name = newName; // 쓰기 예
