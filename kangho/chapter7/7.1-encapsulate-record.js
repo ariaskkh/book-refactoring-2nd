@@ -34,10 +34,18 @@ organization().name = newName; // 쓰기 예
 
 // ex2 중첩된 레코드 캡슐화하기
 // 쓰기 예
-customerData[customerID].usages[year][month] = amount;
+getRawDataOfCustomers()[customerID].usages[year][month] = amount;
 // 읽기 예
 function compareUsage(customerID, laterYear, month) {
-  const later = customerData[customerID].usages[laterYear][month];
-  const earlier = customerData[customerID].usages[laterYear - 1][month];
+  const later = setRawDataOfCustomers()[customerID].usages[laterYear][month];
+  const earlier =
+    setRawDataOfCustomers()[customerID].usages[laterYear - 1][month];
   return { laterAmount: later, change: later - earlier };
+}
+
+function getRawDataOfCustomers() {
+  return customerData;
+}
+function setRawDataOfCustomers(arg) {
+  customerData = arg;
 }
