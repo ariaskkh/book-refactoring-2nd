@@ -7,10 +7,14 @@ class Order {
     this._item = item;
   }
   get price() {
-    var basePrice = this._quantity * this._item.price; // 임시 변수
-    var discountFactor = 0.98; // 임시 변수
-
+    return this.basePrice * this.discountFactor; // 질의 함수
+  }
+  get basePrice() {
+    return this._quantity * this._item.price;
+  }
+  get discountFactor() {
+    var discountFactor = 0.98;
     if (basePrice > 1000) discountFactor -= 0.03;
-    return basePrice * discountFactor;
+    return discountFactor;
   }
 }
