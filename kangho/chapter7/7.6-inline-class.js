@@ -29,7 +29,14 @@ class Shipment {
   set trackingInformation(aTrackingInformation) {
     this._trackingInformation = aTrackingInformation;
   }
+  // 위임 함수 생성
+  get shippingCompany() {
+    return this._trackingInformation.shippingCompany;
+  }
+  set shippingCompany(arg) {
+    this._trackingInformation.shippingCompany = arg;
+  }
 }
 
 // client
-aShipment.trackingInformation.shippingCompany = request.vendor;
+aShipment.shippingCompany = request.vendor;
