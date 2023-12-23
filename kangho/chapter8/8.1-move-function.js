@@ -4,22 +4,16 @@
 // GPS 추적 기록의 총 거리를 계산하는 함수
 function trackSummary() {
   const totaltime = calculateTime();
-  const totalDistance = calculateDistance();
-  const pace = totalTime / 60 / totalDistance;
+  const pace = totalTime / 60 / totalDistance(points);
   return {
     time: totalTime,
     distance: totalDistance,
     pace: pace,
   };
-  // 총 거리 계산
-  function calculateDistance() {
-    return top_calculateDistance();
-  }
-
   function calculateTime() {} // 총 시간 계산
 }
 // 최상위로 복사
-function top_calculateDistance(points) {
+function totalDistance(points) {
   let result = 0;
   for (let i = 1; i < points.length; i++) {
     result += distance(points[i - 1], points[i]);
