@@ -24,9 +24,8 @@ chargeOrder(charge);
 let result;
 if ((availableResources.lenth = 0)) {
   result = createResource();
-  allocateResources.push(result);
 } else {
   result = availableResources.pop();
-  allocatedResources.push(result);
 }
+allocatedResources.push(result);
 return result;
