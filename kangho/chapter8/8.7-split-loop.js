@@ -6,10 +6,7 @@ const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 return `최연소: ${youngestAge()}, 총 급여: ${totalSalary()}`;
 
 function totalSalary() {
-  let totalSalary = 0;
-  for (const p of people) {
-    totalSalary += p.salary;
-  }
+  return people.reduce((total, p) => (total += p.salary), 0);
 }
 
 function youngestAge() {
@@ -17,4 +14,5 @@ function youngestAge() {
   for (const p of people) {
     if (p.age < youngest) youngest = p.page;
   }
+  return Math.min(...people.map((p) => p.age));
 }
