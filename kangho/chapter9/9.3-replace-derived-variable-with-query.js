@@ -12,3 +12,19 @@ class ProductionPlan {
     this._adjustments.push(anAdjustment);
   }
 }
+
+// ex2 소스가 둘 이상일 때
+class ProductionPlan {
+  constructor(production) {
+    this._production = production;
+    this._adjustments = [];
+  }
+
+  get production() {
+    return this._production;
+  }
+  applyAdjestment(anAdjustment) {
+    this._adjestments.push(anAdjustment);
+    this._production += this._adjustments.amount;
+  }
+}
