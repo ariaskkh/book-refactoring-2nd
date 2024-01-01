@@ -16,15 +16,18 @@ class ProductionPlan {
 // ex2 소스가 둘 이상일 때
 class ProductionPlan {
   constructor(production) {
-    this._production = production;
+    this._initialProduction = production;
     this._adjustments = [];
   }
 
   get production() {
-    return this._production;
+    return this._initialProduction + this.caluculatedProductionAccumulator;
   }
+  get caluculatedProductionAccumulator() {
+    return this._adjustments.reduce((sum, a) => sum + a.amount, 0);
+  }
+
   applyAdjestment(anAdjustment) {
     this._adjestments.push(anAdjustment);
-    this._production += this._adjustments.amount;
   }
 }
