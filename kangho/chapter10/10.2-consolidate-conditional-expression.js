@@ -13,3 +13,8 @@ function isNotEligibleForDisability() {
     anEmployee.isPartTime
   );
 }
+
+// ex2) and 사용하기
+
+if (anEmployee.onVacation) if (anEmployee.seniority > 10) return 1;
+return 0.5;
