@@ -1,8 +1,7 @@
 // 조건문 분해하기
 
 //ex 1
-if (summer()) summerCharge();
-else regularCharge();
+charge = summer() ? summerCharge() : regularCharge();
 
 function summer() {
   return !aDate.isBefore(plan.summerStart) && !aDate.isAfter(plan.summerEnd);
