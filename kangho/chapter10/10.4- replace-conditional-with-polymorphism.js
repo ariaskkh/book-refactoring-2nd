@@ -72,4 +72,3 @@ class NorwegianBlueParrot extends Bird {
         return bird.isNailed ? 0 : 10 + bird.voltage / 10;
     }
 }
-
