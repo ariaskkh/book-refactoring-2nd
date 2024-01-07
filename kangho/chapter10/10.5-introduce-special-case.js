@@ -28,6 +28,17 @@ class Customer {
 
 class UnknownCustomer {
     get isUnknown() {return true}
+
+    get name() {return '거주자';}
+
+    get billingPlan() { return registry.billingPlans.basic}
+    set billingPlan(arg) {/* 무시한다 */}
+
+    get paymentHistory() {return new NullPaymentHistory()}
+}
+
+class NullPaymentHistory {
+    get weekDelinquentInLastYear() {return 0}
 }
 
 function isUnknown(arg) {
@@ -37,19 +48,14 @@ function isUnknown(arg) {
 }
 
 // client 1
-const aCustomer = site.customer
+const customerName = site.customer.name
 // ...
-let customerName;
-if(isUnknown(aCustomer)) customerName = '거주자';
-else customerName = aCustomer.name;
 
 // client 2
-const plan = (isUnknown(aCustomer)) ?
-    registry.billingPlans.basic :
-    aCustomer.billingPlan;
+const plan = aCustomer.billingPlan;
 
 // client 3
-if (isUnknown(aCustomer)) aCustomer.billingPlan = newPlan
+aCustomer.billingPlan = newPlan;
 
 // client 4
-const weeksDelinquent = (isUnknown(aCustomer)) ? 0 : aCustomer.paymentHistory.weeksDelinquent
+const weeksDelinquent =  aCustomer.paymentHistory.weeksDelinquentInLastYear
