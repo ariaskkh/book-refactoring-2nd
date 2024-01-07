@@ -2,7 +2,7 @@
 
 // ex1)
 class Site {
-    get customer() {return this._customer}
+    get customer() {return (this._customer === '미확인 고객')? new UnknownCustomer(): this._customer}
 }
 
 class Customer {
@@ -19,25 +19,37 @@ class Customer {
         // ...
     }
     // 납부 이력
-    get paymentHistory(){
+    set paymentHistory(){
         // ...
     }
+
+    get isUnknown() {return false;}
+}
+
+class UnknownCustomer {
+    get isUnknown() {return true}
+}
+
+function isUnknown(arg) {
+    if(!((arg instanceof Customer) || (arg === '미확인 고객')))
+    throw new Error(`잘못된 값과 비교: <${arg}>`)
+    return arg.isUnknown;
 }
 
 // client 1
 const aCustomer = site.customer
 // ...
 let customerName;
-if(aCustomer === '미확인 고객') customerName = '거주자';
+if(isUnknown(aCustomer)) customerName = '거주자';
 else customerName = aCustomer.name;
 
 // client 2
-const plan = (aCustomer === '미확인 고객') ?
+const plan = (isUnknown(aCustomer)) ?
     registry.billingPlans.basic :
     aCustomer.billingPlan;
 
 // client 3
-if (aCustoemr !== '미확인 고객') aCustomer.billingPlan = newPlan
+if (isUnknown(aCustomer)) aCustomer.billingPlan = newPlan
 
 // client 4
-const weeksDelinquent = (aCustomer === '미확인 고객') ? 0 : aCustomer.paymentHistory.weeksDelinquent
+const weeksDelinquent = (isUnknown(aCustomer)) ? 0 : aCustomer.paymentHistory.weeksDelinquent
