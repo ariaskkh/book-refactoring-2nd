@@ -10,11 +10,25 @@ function speeds(birds) {
 }
 
 function plumage(bird) {
-    return new Bird(bird).plumage
+    return new createBird(bird).plumage
 }
 
 function airSpeedVelocity(bird){
-    return new Bird(bird).airSpeedVelocity
+    return new createBird(bird).airSpeedVelocity
+}
+
+// factory 함수
+function createBird(bird){
+    switch (bird.type){
+        case "유럽 제비":
+            return new EuropeanSwallow(bird);
+        case "아프리카 제비":
+            return new AfricanSwallow(bird);
+        case "노르웨이 파랑 앵무":
+            return new NorwegianBlueParrot(bird)
+        default:
+            return new Bird(bird);
+    }
 }
 
 class Bird {
@@ -36,7 +50,7 @@ class Bird {
         }
       }
       
-      get airSpeedVelocity(bird) {
+    get airSpeedVelocity(bird) {
         // 비행 속도
         switch (bird.type) {
           case "유럽 제비":
@@ -48,7 +62,18 @@ class Bird {
           default:
             return null;
         }
-      }
-      
+    }      
+}
+
+class EuropeanSwallow extends Bird {
+
+}
+
+class AfricanSwallow extends Bird {
+    
+}
+
+class NorwegianBlueParrot extends Bird {
+    
 }
 
