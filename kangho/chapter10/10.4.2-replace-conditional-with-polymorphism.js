@@ -4,7 +4,7 @@
 
 // 투자 등급
 function rating(voyage, history) {
-  return new Rating(voyage, history).value
+  return createRating(voyage, history).value
 }
 
 // 함수들을 Rating 클래스로 묶었다.
@@ -62,6 +62,17 @@ class Rating {
     return result;
     }
 
+}
+
+
+class ExperiencedChinaRating extends Rating {
+
+}
+
+function createRating(voyage, history){
+    if (voyage.zone === "중국" && history.some((v) => "중국" === v.zone))
+    return new ExperiencedChinaRating(voyage, history);
+    else return new Rating(voyage, history)
 }
 
 // client
