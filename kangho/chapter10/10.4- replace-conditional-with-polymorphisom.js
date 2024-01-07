@@ -2,19 +2,15 @@
 
 // ex1)
 function plumages(birds) {
-  return new Map(birds.map((b) => [b.name, plumage(b)]));
+    return new Map(birds
+        .map(b => createBird(b))
+        .map(bird => [bird.name, bird.plumage]))
 }
 
 function speeds(birds) {
-  return new Map(birds.map((b) => [b.name, airSpeedVelocity(b)]));
-}
-
-function plumage(bird) {
-    return new createBird(bird).plumage
-}
-
-function airSpeedVelocity(bird){
-    return new createBird(bird).airSpeedVelocity
+  return new Map(birds
+    .map((b) => createBird(b))
+    .map((bird) => [bird.name, bird.airSpeedVelocity]));
 }
 
 // factory 함수
@@ -33,7 +29,7 @@ function createBird(bird){
 
 class Bird {
     constructor(birdObject){
-        Object.assign(this, birdObject);
+        Object.assign(this, birdObject); // 여기서 bird.name도 들어 있어서 사용 가능
     }
 
     get plumage() {
@@ -43,7 +39,7 @@ class Bird {
       
     get airSpeedVelocity(bird) {
         // 비행 속도
-            return null;
+        return null;
     }      
 }
 
