@@ -4,7 +4,9 @@
 
 class Site {
   get customer() {
-    return this._customer;
+    return this._customer === "미확인 고객"
+      ? createUnknownCustomer()
+      : this._customer;
   }
 }
 
@@ -29,27 +31,25 @@ class Customer {
 
 function createUnknownCustomer() {
   return {
-    isunknown: true,
+    isUnknown: true,
+    name: "거주자",
+    billingPlan: registry.billingPlans.basic,
+    paymentHistory: {
+      weeksDelingquentInLastYear: 0,
+    },
   };
 }
 
 function isUnknown(arg) {
-  return arg === "미확인 고객";
+  return arg.isUnknown;
 }
 
 // client1
-const aCustomer = site.customer;
 // 수많은 코드
-let customerName;
-if (isUnknown(arg)) customerName = "거주자";
-else customerName = aCustomer.name;
+customerName = aCustomer.name;
 
 // client2
-const plan = isUnknown(arg)
-  ? registry.billingPlans.basic
-  : aCustomer.billingPlan;
+const plan = aCustomer.billingPlan;
 
 // client3
-const weekDelinquent = isUnknown(arg)
-  ? 0
-  : aCustomer.paymentHistory.weeksDelingquentInLastYear;
+const weekDelinquent = aCustomer.paymentHistory.weeksDelingquentInLastYear;
