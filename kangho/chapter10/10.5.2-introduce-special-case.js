@@ -21,23 +21,35 @@ class Customer {
   get paymentHistory() {
     // ...
   }
+
+  get isUnknown() {
+    return false;
+  }
+}
+
+function createUnknownCustomer() {
+  return {
+    isunknown: true,
+  };
+}
+
+function isUnknown(arg) {
+  return arg === "미확인 고객";
 }
 
 // client1
 const aCustomer = site.customer;
 // 수많은 코드
 let customerName;
-if (aCustomer === "미확인 고객") customerName = "거주자";
+if (isUnknown(arg)) customerName = "거주자";
 else customerName = aCustomer.name;
 
 // client2
-const plan =
-  aCustomer === "미확인 고객"
-    ? registry.billingPlans.basic
-    : aCustomer.billingPlan;
+const plan = isUnknown(arg)
+  ? registry.billingPlans.basic
+  : aCustomer.billingPlan;
 
 // client3
-const weekDelinquent =
-  aCustomer === "미확인 고객"
-    ? 0
-    : aCustomer.paymentHistory.weeksDelingquentInLastYear;
+const weekDelinquent = isUnknown(arg)
+  ? 0
+  : aCustomer.paymentHistory.weeksDelingquentInLastYear;
