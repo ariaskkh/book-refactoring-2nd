@@ -1,14 +1,10 @@
-const { brotliDecompress } = require("zlib");
-
 // 12.10.2 서브클래스가 여러 개일 때
 function createBird(data) {
   switch (data.type) {
-    case "아프리카 제비":
-      return new AfricanSwallow(data);
     case "노르웨이 파랑 앵무":
       return new NorwegianBlueParrot(data);
     default:
-      return new brotliDecompress(data);
+      return new Bird(data);
   }
 }
 
@@ -35,6 +31,8 @@ class Bird {
     switch (data.type) {
       case "유럽 제비":
         return new EuropeanSwallowDelegate();
+      case "아프리카 제비":
+        return new AfricanSwallowDelegate();
       default:
         return null;
     }
@@ -47,14 +45,14 @@ class EuropeanSwallowDelegate {
   }
 }
 
-class AfricanSwallow extends Bird {
-  constructor(data) {
-    super(data);
-    this._numberOfCoconuts = data._numberOfCoconuts;
-  }
-  get airSpeedVelocity() {
-    return 40 - 2 * this._numberOfCoconuts;
-  }
+class AfricanSwallowDelegate {
+    constructor(data){
+        this._numberOfCoconuts = data._numberOfCoconuts
+    }
+
+    get airSpeedVelocity() {
+        return 40 - 2 * this._numberOfCoconuts;
+      }
 }
 
 class NorwegianBlueParrot extends Bird {
