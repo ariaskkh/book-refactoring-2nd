@@ -18,6 +18,7 @@ class Bird {
   constructor(data) {
     this._name = data.name;
     this._plumage = data._plumage;
+    this._speciesDelegate = this.selectSpeciesDelegate(data);
   }
 
   get name() {
@@ -29,6 +30,15 @@ class Bird {
   get airSppedVelocity() {
     return null;
   }
+
+  selectSpeciesDelegate(data) {
+    switch (data.type) {
+      case "유럽 제비":
+        return new EuropeanSwallowDelegate();
+      default:
+        return null;
+    }
+  }
 }
 
 class EuropeanSwallow extends Bird {
@@ -36,6 +46,8 @@ class EuropeanSwallow extends Bird {
     return 35;
   }
 }
+
+class EuropeanSwallowDelegate {}
 
 class AfricanSwallow extends Bird {
   constructor(data) {
