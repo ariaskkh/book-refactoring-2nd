@@ -13,6 +13,7 @@ class Booking {
   get basePrice() {
     let result = this._show.price;
     if (this.isPeakDay) result += Math.round(result * 0.15);
+    return result;
   }
 
   _bePremium(extras) {
@@ -23,7 +24,7 @@ class Booking {
 class PremiumBooking extends Booking {
   constructor(show, date, extras) {
     super(show, date);
-    this._extra = extras;
+    this._extras = extras;
   }
 
   hasTalkback() {
@@ -41,7 +42,7 @@ class PremiumBooking extends Booking {
 
 class PremiumBookingDelegate {
   constructor(hostBooking, extras) {
-    this._host = hostBooking;
+    this._host = hostBooking; // 이게 왜 필요할까?
     this._extras = extras;
   }
 }
@@ -57,5 +58,19 @@ function createPremiumBooking(show, date, extras) {
 }
 
 // client
-aBooking = createBooking(show, date);
-aBooking = createPremiumBooking(show, date, extras);
+const show = { price: 100, talkback: true };
+const date = new Date();
+const extras = { dinner: true, premiumFee: 50 };
+
+const aBooking1 = createBooking(show, date);
+console.log(aBooking1);
+console.log("basePrice: ", aBooking1.basePrice);
+console.log("hasTalkback: ", aBooking1.hasTalkback());
+console.log("\n");
+
+const aBooking2 = createPremiumBooking(show, date, extras);
+console.log(aBooking2);
+console.log("basePrice: ", aBooking2.basePrice);
+console.log("hasTalkback: ", aBooking2.hasTalkback());
+console.log("hasDinner: ", aBooking2.hasDinner);
+console.log("\n");
